@@ -1,31 +1,44 @@
 import streamlit as st
 import numpy as np
-
-# Import your libraries here
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
+# ----------------------------
+# Create a local "iris-like" dataset (no internet needed)
+# ----------------------------
+np.random.seed(42)
 
+df = pd.DataFrame({
+    "sepal_length": np.random.normal(5.8, 0.8, 150),
+    "sepal_width": np.random.normal(3.0, 0.4, 150),
+    "petal_length": np.random.normal(3.7, 1.7, 150),
+    "petal_width": np.random.normal(1.2, 0.8, 150),
+})
 
-
-# Load the iris dataset
-df = sns.load_dataset('iris')
-
-# Violin plot for every feature
-sns.violinplot(data=df)
-fig = plt.gcf();
-
-
-# Title of the app
+# ----------------------------
+# App title
+# ----------------------------
 st.title("Hello Streamlit 👋")
 
+# ----------------------------
+# Dataset preview
+# ----------------------------
+st.subheader("Iris-like dataset (local)")
+st.dataframe(df.head())
 
+# ----------------------------
+# Streamlit native chart (no matplotlib)
+# ----------------------------
+st.subheader("Feature distribution (line chart)")
+st.line_chart(df)
 
-student_name = st.text_input("Enter the student's name:", icon="🚨")
-# Slider for student's age
+# ----------------------------
+# User inputs
+# ----------------------------
+st.subheader("Student Information")
+
+student_name = st.text_input("Enter the student's name:")
 student_age = st.slider("Select the student's age:", 1, 100)
-# Button to display the input text and age
+
 if st.button("Display Information"):
-    st.write("Student's name: ",student_name)
-    st.write("Student's age: ",student_age)
+    st.write(f"👤 Student's name: **{student_name}**")
+    st.write(f"🎂 Student's age: **{student_age}**")
