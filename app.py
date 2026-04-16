@@ -1,10 +1,14 @@
 import streamlit as st
 import numpy as np
-import pandas as pd
+
 # Import your libraries here
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-%matplotlib inline
+
+
+
+
 # Load the iris dataset
 df = sns.load_dataset('iris')
 
